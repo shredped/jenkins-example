@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  #app:
+  #  image: openjdk:17-alpine
+  #  volumes:
+  #    - ./app/src:/app
+  jenkins:
+    build: ./jenkins
+    volumes:
+      - ./jenkins/data:/var/jenkins_home
+      - ./jenkins/kubeconfig:/etc/kubeconfig
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+    ports:
+      - 8080:8080
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
